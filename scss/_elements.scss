@@ -5,3 +5,112 @@
 //    ファイル名：_elements.scss
 //    機能：各素材のスタイルを記述する
 // ------------------------------------------------
+
+// ----------------------
+//  フローチャート
+// ----------------------
+.bl_flowChart_ttl {
+  text-align: center;
+
+  // 余白
+  margin-bottom: 10px;
+}
+
+// リスト
+.bl_flowChart_list {
+  // 基準位置を設定
+  position: relative;
+
+  // カウンター初期化
+  counter-reset: bl_orderList_cnt;
+
+  // 横幅設定＆中央揃え
+  max-width: 500px;
+  margin: 0 auto;
+
+  // 縦のラインを定義
+  &::after {
+    // 位置
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    // スタイル
+    display: block;
+    content: "";
+    width: 6px;
+
+    // メモ：動的に定義できると良い(jQuery)
+    height: 260px;
+    background-color: beige;
+    z-index: -1;
+  }
+}
+
+// リストアイテム
+.bl_flowChart_item {
+  // リストスタイルを消去
+  list-style: none;
+
+  // 背景色
+  background-color: beige;
+
+  // 太字
+  font-weight: bold;
+
+  // 余白
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 150px;
+  margin-bottom: 10px;
+
+  // リストスタイルを定義
+  & > span {
+    // 基準位置を設定
+    position: relative;
+
+    // リストスタイルのスペースを確保
+    padding-left: 1em;
+
+    &::before {
+      // カウンターインクリメント
+      counter-increment: bl_orderList_cnt;
+
+      // リストスタイルを再定義
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: counter(bl_orderList_cnt) ".";
+      color: #f00;
+      font-weight: bold;
+    }
+  }
+
+  // フローをスキップするアイテム
+  &.bl_flowChart_item__skip {
+    // 基準位置を設定
+    position: relative;
+
+    // サイズ
+    max-width: 440px;
+
+    // 縦のラインを定義
+    &::after {
+      // 位置
+      position: absolute;
+      top: -10px;
+      right: -30px;
+
+      // スタイル
+      display: block;
+      content: "";
+      width: 6px;
+
+      // メモ：動的に定義できると良い(jQuery)
+      height: 64px;
+      background-color: beige;
+      z-index: -1;
+    }
+  }
+}
