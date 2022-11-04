@@ -1,0 +1,24 @@
+// ------------------------------------------------
+//  ファイル名：_variables.scss
+//  機能：変数を記述する
+// ------------------------------------------------
+// ベースカラー
+$base-color: #333;
+
+// フォントの太さ
+$fontweights: (
+  thin: 100,
+  light: 300,
+  regular: 400,
+  medium: 500,
+  bold: 700,
+  extrabold: 800,
+  black: 900,
+) !default;
+
+// ブレークポイント
+$breakpoints: (
+  md: 768px,
+  max-width: 960px,
+  lg: 1440px,
+) !default;

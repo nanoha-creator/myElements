@@ -1,0 +1,303 @@
+@use "mixin" as m;
+@use "variables" as v;
+
+// ------------------------------------------------
+//  ファイル名：_main.scss
+//  機能：webページ全体のスタイルを記述する
+// ------------------------------------------------
+
+// ----------------------
+//  ラッパー
+// ----------------------
+.wrapper {
+  overflow-x: hidden;
+}
+
+// ----------------------
+//  レイアウト
+// ----------------------
+
+// ヘッダー
+.ly_header {
+  width: 100vw;
+}
+
+.ly_header_inner {
+  max-width: 960px;
+  margin: 0 30px;
+
+  @include m.media-query-min(max-width) {
+    margin: 0 auto;
+  }
+}
+
+// コンテンツ
+.ly_cont {
+  width: 100vw;
+  padding: 30px 0;
+}
+
+.ly_cont_inner {
+  max-width: 960px;
+  margin: 30px;
+
+  @include m.media-query-min(max-width) {
+    margin: 0 auto;
+  }
+}
+
+// フッター
+.ly_footer {
+  width: 100vw;
+  padding: 30px 0;
+  background-color: #e7e3da;
+}
+
+// ----------------------
+//  ヘッダー
+// ----------------------
+.bl_headerUtils {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-center;
+  padding: 20px 30px 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background-color: #fff;
+
+  // シャドウ
+  box-shadow: 0 3px 3px #baa896;
+
+  // 全幅＆余白調整
+  width: 100vw;
+  margin: 0 calc(50% - 50vw);
+  padding-left: calc(50vw - 50%);
+  padding-right: calc(50vw - 50%);
+}
+
+.bl_headerUtils_siteTtl {
+  // 高さ
+  height: 30px;
+
+  // 中央揃え
+  display: flex;
+  align-items: center;
+
+  a {
+    // 文字スタイル
+    text-decoration: none;
+    color: v.$base-color;
+    font-size: 1.25rem;
+  }
+}
+
+// ----------------------
+//  ハンバーガーボタン
+// ----------------------
+.bl_hamburgerBtn {
+  display: flex;
+  align-items: center;
+
+  @include m.media-query-min(md) {
+    display: none;
+  }
+}
+
+// ハンバーガーボタンアイコン
+.bl_hamburgerBtn_icon {
+  // 基準座標を設定
+  position: relative;
+
+  // 最前面に描画する
+  z-index: 3;
+
+  // ブロック要素に設定
+  display: block;
+  width: 30px;
+  height: 15px;
+}
+
+// ハンバーガーボタン（オープン）：共通
+.bl_hamburgerBtn_bar {
+  position: absolute;
+  display: block;
+  width: inherit;
+  height: 2px;
+  background-color: v.$base-color;
+  transition: all 0.3s;
+  border-radius: 100vh;
+}
+
+// ハンバーガーボタン（オープン）：一段目のバー
+.bl_hamburgerBtn_bar.bl_hamburgerBtn_bar__top {
+  top: -1px;
+}
+
+// ハンバーガーボタン（オープン）：二段目のバー
+.bl_hamburgerBtn_bar.bl_hamburgerBtn_bar__mid {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+// ハンバーガーボタン（オープン：三段目のバー
+.bl_hamburgerBtn_bar.bl_hamburgerBtn_bar__bottom {
+  bottom: -1px;
+}
+
+// ハンバーガーボタン（クローズ）：一段目のバー
+.bl_hamburgerBtn.is_close .bl_hamburgerBtn_bar.bl_hamburgerBtn_bar__top {
+  transform: translate(0, 7.8px) rotate(30deg);
+}
+
+// ハンバーガーボタン（クローズ）：二段目のバー
+.bl_hamburgerBtn.is_close .bl_hamburgerBtn_bar.bl_hamburgerBtn_bar__mid {
+  opacity: 0;
+}
+
+// ハンバーガーボタン（クローズ）：三段目のバー
+.bl_hamburgerBtn.is_close .bl_hamburgerBtn_bar.bl_hamburgerBtn_bar__bottom {
+  transform: translate(0, -7.8px) rotate(-30deg);
+}
+
+// ハンバーガーボタンのオープン時はスクロールしない
+.is_noscroll {
+  overflow: hidden;
+}
+
+// ----------------------
+//  ヘッダーナビゲーション
+// ----------------------
+.bl_headerNav {
+  // タブレット幅以下では、ハンバーガーボタンに含める
+  display: none;
+
+  @include m.media-query-min(md) {
+    display: block;
+  }
+}
+
+.bl_headerNav_inner {
+  display: flex;
+  justify-content: space-between;
+
+  // リストスタイル
+  list-style: none;
+
+  > li {
+    // 高さ
+    height: 35px;
+
+    // 中央揃え
+    display: flex;
+    align-items: center;
+
+    // 余白
+    margin: 0 30px 0 0;
+
+    // 最後の要素に右マージンは不要
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.bl_headerNav_link {
+  text-decoration: none !important;
+  color: #333 !important;
+}
+
+// ----------------------
+//  メインビジュアル
+// ----------------------
+.bl_mainVisual {
+  // 基準位置を設定
+  position: relative;
+
+  // 高さ
+  height: 250px;
+
+  // 背景色
+  background-color: #e7e3da;
+}
+
+.bl_mainVisual_body {
+  // 相対位置を設定
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  // 中央揃え
+  text-align: center;
+}
+
+.bl_mainVisual_ttl {
+  // 余白
+  margin-bottom: 10px;
+}
+
+.bl_mainVisual_txt {
+  white-space: nowrap;
+}
+
+// ----------------------
+//  セクション
+// ----------------------
+// h2タイトル
+.bl_section_lv2Ttl {
+  // 基準位置を設定
+  position: relative;
+
+  // タイトルのスタイルを定義
+  background-color: #e7e3da;
+  padding-left: 12px;
+
+  // 余白
+  margin-bottom: 15px;
+
+  // タイトルのスタイルを定義
+  &::before {
+    // 位置
+    position: absolute;
+    left: 0;
+
+    // スタイル
+    display: block;
+    content: "";
+    height: 100%;
+    width: 8px;
+    background-color: #baa896;
+  }
+}
+
+// h3タイトル
+.bl_section_lv3Ttl {
+  // タイトルのスタイルを定義
+  border-bottom: 2px solid #baa896;
+
+  // 余白
+  margin-bottom: 15px;
+}
+
+// セクションメッセージ
+.bl_section_msg {
+  // 余白
+  margin-bottom: 15px;
+}
+
+// ----------------------
+// フッター
+// ----------------------
+.el_copyRight {
+  // 文字設定
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+// ----------------------
+//  ヘルパー
+// ----------------------
