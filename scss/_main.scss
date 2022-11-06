@@ -278,7 +278,12 @@
   border-bottom: 2px solid v.$base-color;
 
   // 余白
-  margin-bottom: 15px;
+  margin: 15px 0;
+}
+
+// セクション本体
+.bl_section_body {
+  margin: 0 1em;
 }
 
 // セクションメッセージ

@@ -62,7 +62,7 @@
   // 余白
   padding-top: 9px;
   padding-bottom: 9px;
-  padding-left: 150px;
+  padding-left: 190px;
   margin-bottom: 10px;
 
   // リストスタイルを定義
@@ -79,8 +79,9 @@
 
       // リストスタイルを再定義
       position: absolute;
-      top: 0;
+      top: 50%;
       left: 0;
+      transform: translateY(-50%);
       content: counter(bl_orderList_cnt) ".";
       color: v.$accent-color-elm;
       font-weight: bold;

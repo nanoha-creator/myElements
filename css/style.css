@@ -225,7 +225,11 @@ img {
 
 .bl_section_lv3Ttl {
   border-bottom: 2px solid #baa896;
-  margin-bottom: 15px;
+  margin: 15px 0;
+}
+
+.bl_section_body {
+  margin: 0 1em;
 }
 
 .bl_section_msg {
@@ -274,7 +278,7 @@ img {
   font-weight: bold;
   padding-top: 9px;
   padding-bottom: 9px;
-  padding-left: 150px;
+  padding-left: 190px;
   margin-bottom: 10px;
 }
 
@@ -286,8 +290,9 @@ img {
 .bl_flowChart_item > span::before {
   counter-increment: bl_orderList_cnt;
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
+  transform: translateY(-50%);
   content: counter(bl_orderList_cnt) ".";
   color: #e38b75;
   font-weight: bold;
