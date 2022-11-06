@@ -10,3 +10,5 @@ scss/\_elements.scss：各エレメントのスタイルを記述
 HTML / CSS(SCSS) / jQuery
 
 ### 特記事項
+
+モバイルファーストで、ブレークポイントは、768px のみ。

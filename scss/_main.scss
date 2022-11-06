@@ -39,7 +39,10 @@
 
 .ly_cont_inner {
   max-width: 960px;
-  margin: 30px;
+
+  // 余白
+  padding-top: 30px;
+  margin: 0 15px;
 
   @include m.media-query-min(max-width) {
     margin: 0 auto;
@@ -283,18 +286,18 @@
 
 // セクション本体
 .bl_section_body {
-  margin: 0 1em;
+  margin: 0 15px;
 }
 
 // セクションメッセージ
 .bl_section_msg {
   // 余白
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 // セクションコンテンツ
 .bl_section_cont {
-  margin: 30px 0;
+  margin-bottom: 50px;
 }
 
 // ----------------------

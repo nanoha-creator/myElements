@@ -7,6 +7,272 @@
 // ------------------------------------------------
 
 // ----------------------
+//  カードモジュール
+// ----------------------
+.un_card01 {
+  // 複数カードのまとまり
+  .bl_cardUnit {
+    // スマホ幅でblock要素のままだとマージンの相殺が起こるため、
+    // （bl_section_contの下マージン50pxとbl_cardUnitの下マージン-20px）
+    // スマホ幅でもflex指定にしておく
+    display: flex;
+    flex-wrap: wrap;
+
+    // 余白（最終行の余白を相殺★）
+    margin-bottom: -20px;
+
+    & > .bl_card {
+      // 幅
+      width: 100%;
+
+      // 余白（最終行は相殺される★）
+      margin-bottom: 20px;
+    }
+  }
+
+  // ３列ごとに改行
+  .bl_cardUnit__col3 {
+    & > .bl_card {
+      @include m.media-query-min(md) {
+        // 横幅と右マージンを指定
+        width: 32%;
+        margin-right: 2%;
+      }
+    }
+
+    & > .bl_card:nth-of-type(3n) {
+      @include m.media-query-min(md) {
+        // 3の倍数個目の要素は、右マージン不要
+        margin-right: 0;
+      }
+    }
+  }
+
+  // カード
+  .bl_card {
+    // シャドウ
+    box-shadow: 0 0 6px rgb(0 0 0 / 16%);
+
+    // クリックできそうを表現
+    cursor: pointer;
+    color: v.$black-color;
+    text-decoration: none;
+
+    // ホバー時、フォーカス時にシャドウを変化させる
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 20px rgb(0 0 0 / 32%);
+    }
+  }
+
+  // 画像
+  .bl_card_imgWrapper {
+    // 基準位置を設定
+    position: relative;
+
+    // 16:9で表示する指定（9/16=56.25%）
+    // absolute指定があるので、heightでは高さを確保できないため、
+    // padding-topで領域を確保する
+    padding-top: 56.25%;
+
+    // 表示不要な部分を隠す
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
+      // 元画像の高さ/幅が56.25%より小さい場合は、width:auto,height:100%
+      // 元画像の高さ/幅が56.25%より大きい場合は、width:100%,height:auto
+      // メモ：動的に定義できると良い(jQuery)
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  // 画像下のコンテンツ
+  .bl_card_body {
+    // 余白
+    padding: 15px;
+  }
+
+  // タイトル
+  .bl_card_ttl {
+    // 文字
+    font-size: 1.125rem;
+    font-weight: map-get(v.$fontweights, bold);
+    margin-bottom: 15px;
+  }
+}
+
+// ----------------------
+//  番号付きカードモジュール（コード追加分）
+// ----------------------
+.un_card02 {
+  // 複数カードのまとまり
+  .bl_cardUnit {
+    // スマホ幅でblock要素のままだとマージンの相殺が起こるため、
+    // （bl_section_contの下マージン50pxとbl_cardUnitの下マージン-20px）
+    // スマホ幅でもflex指定にしておく
+    display: flex;
+    flex-wrap: wrap;
+
+    // 余白（最終行の余白を相殺★）
+    margin-bottom: -20px;
+
+    // カウンター初期化
+    counter-reset: bl_card_cnt;
+
+    & > .bl_card {
+      // 幅
+      width: 100%;
+
+      // 余白（最終行は相殺される★）
+      margin-bottom: 20px;
+    }
+  }
+
+  // ３列ごとに改行
+  .bl_cardUnit__col2 {
+    & > .bl_card {
+      @include m.media-query-min(md) {
+        // 横幅と右マージンを指定
+        width: 48%;
+        margin-right: 4%;
+      }
+    }
+
+    & > .bl_card:nth-of-type(2n) {
+      @include m.media-query-min(md) {
+        // 2の倍数個目の要素は、右マージン不要
+        margin-right: 0;
+      }
+    }
+  }
+
+  // カード
+  .bl_card {
+    // 基準位置を設定
+    position: relative;
+    margin-top: 64px;
+
+    // 背景色
+    background-color: #fff;
+
+    // ボーダー
+    border-top: 3px solid v.$accent-color-elm;
+    border-right: 1px solid rgb(0 0 0 / 16%);
+    border-bottom: 1px solid rgb(0 0 0 / 16%);
+    border-left: 1px solid rgb(0 0 0 / 16%);
+
+    // カード上部の半円部分のボーダーを欠けさせる
+    // カードの背景色で上書き
+    &::before {
+      // 位置
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      // スタイル
+      display: block;
+      content: "";
+      width: 70px;
+      height: 3px;
+      background-color: #fff;
+    }
+  }
+
+  // カード上部の装飾
+  .bl_card_badge {
+    // 位置（bl_cardの基準位置が採用される）
+    position: absolute;
+    top: -64px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    // 中央揃え
+    text-align: center;
+
+    // 文字
+    font-size: 1.125rem;
+    font-weight: map-get(v.$fontweights, bold);
+    color: v.$accent-color-elm;
+
+    &::after {
+      // 前面に表示
+      z-index: 2;
+
+      // スタイル
+      display: block;
+
+      // 数字部分
+      content: counter(bl_card_cnt);
+      padding-top: 8px;
+      font-size: 2rem;
+      font-weight: map-get(v.$fontweights, bold);
+
+      // 半円部分
+      width: 70px;
+      height: 35px;
+      border-radius: 35px 35px 0 0;
+      border: 3px solid v.$accent-color-elm;
+      border-bottom: transparent;
+
+      // カウンターインクリメント
+      counter-increment: bl_card_cnt;
+    }
+  }
+
+  // カード（内部）
+  .bl_card_inner {
+    // 余白
+    padding: 30px 15px 15px;
+  }
+
+  // タイトル
+  .bl_card_ttl {
+    // 文字
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: map-get(v.$fontweights, bold);
+
+    // 余白
+    margin-bottom: 15px;
+  }
+
+  // 画像
+  .bl_card_imgWrapper {
+    // 基準位置を設定
+    position: relative;
+
+    // 16:9で表示する指定（9/16=56.25%）
+    // absolute指定があるので、heightでは高さを確保できないため、
+    // padding-topで領域を確保する
+    padding-top: 56.25%;
+
+    // 表示不要な部分を隠す
+    overflow: hidden;
+
+    // 余白
+    margin-bottom: 15px;
+
+    img {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
+      // 元画像の高さ/幅が56.25%より小さい場合は、width:auto,height:100%
+      // 元画像の高さ/幅が56.25%より大きい場合は、width:100%,height:auto
+      // メモ：動的に定義できると良い(jQuery)
+      height: auto;
+      width: 100%;
+    }
+  }
+}
+
+// ----------------------
 //  フローチャート
 // ----------------------
 .bl_flowChart_ttl {
@@ -62,7 +328,7 @@
   // 余白
   padding-top: 9px;
   padding-bottom: 9px;
-  padding-left: 190px;
+  padding-left: 35%;
   margin-bottom: 10px;
 
   // リストスタイルを定義
@@ -94,14 +360,14 @@
     position: relative;
 
     // サイズ
-    max-width: 440px;
+    max-width: 85%;
 
     // 縦のラインを定義
     &::after {
       // 位置
       position: absolute;
       top: -10px;
-      right: -30px;
+      right: -10%;
 
       // スタイル
       display: block;
