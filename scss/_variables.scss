@@ -2,8 +2,16 @@
 //  ファイル名：_variables.scss
 //  機能：変数を記述する
 // ------------------------------------------------
+// 黒
+$black-color: #333;
+
 // ベースカラー
-$base-color: #333;
+$base-color: #baa896;
+$base-color-light: #e7e3da;
+$base-color-elm: #f3ecd8;
+
+// アクセントカラー
+$accent-color-elm: #e38b75;
 
 // フォントの太さ
 $fontweights: (

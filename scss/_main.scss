@@ -50,7 +50,7 @@
 .ly_footer {
   width: 100vw;
   padding: 30px 0;
-  background-color: #e7e3da;
+  background-color: v.$base-color-light;
 }
 
 // ----------------------
@@ -68,7 +68,7 @@
   background-color: #fff;
 
   // シャドウ
-  box-shadow: 0 3px 3px #baa896;
+  box-shadow: 0 3px 3px v.$base-color;
 
   // 全幅＆余白調整
   width: 100vw;
@@ -88,7 +88,7 @@
   a {
     // 文字スタイル
     text-decoration: none;
-    color: v.$base-color;
+    color: v.$black-color;
     font-size: 1.25rem;
   }
 }
@@ -125,7 +125,7 @@
   display: block;
   width: inherit;
   height: 2px;
-  background-color: v.$base-color;
+  background-color: v.$black-color;
   transition: all 0.3s;
   border-radius: 100vh;
 }
@@ -219,7 +219,7 @@
   height: 250px;
 
   // 背景色
-  background-color: #e7e3da;
+  background-color: v.$base-color-light;
 }
 
 .bl_mainVisual_body {
@@ -251,7 +251,7 @@
   position: relative;
 
   // タイトルのスタイルを定義
-  background-color: #e7e3da;
+  background-color: v.$base-color-light;
   padding-left: 12px;
 
   // 余白
@@ -268,14 +268,14 @@
     content: "";
     height: 100%;
     width: 8px;
-    background-color: #baa896;
+    background-color: v.$base-color;
   }
 }
 
 // h3タイトル
 .bl_section_lv3Ttl {
   // タイトルのスタイルを定義
-  border-bottom: 2px solid #baa896;
+  border-bottom: 2px solid v.$base-color;
 
   // 余白
   margin-bottom: 15px;

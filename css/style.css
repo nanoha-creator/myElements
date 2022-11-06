@@ -264,13 +264,13 @@ img {
   content: "";
   width: 6px;
   height: 260px;
-  background-color: beige;
+  background-color: #f3ecd8;
   z-index: -1;
 }
 
 .bl_flowChart_item {
   list-style: none;
-  background-color: beige;
+  background-color: #f3ecd8;
   font-weight: bold;
   padding-top: 9px;
   padding-bottom: 9px;
@@ -289,7 +289,7 @@ img {
   top: 0;
   left: 0;
   content: counter(bl_orderList_cnt) ".";
-  color: #f00;
+  color: #e38b75;
   font-weight: bold;
 }
 
@@ -306,6 +306,6 @@ img {
   content: "";
   width: 6px;
   height: 64px;
-  background-color: beige;
+  background-color: #f3ecd8;
   z-index: -1;
 }
