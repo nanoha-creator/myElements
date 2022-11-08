@@ -7,6 +7,193 @@
 // ------------------------------------------------
 
 // ----------------------
+//  吹き出しモジュール
+// ----------------------
+// アイコン＋吹き出しのペア
+.bl_baloonBox {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  // 余白
+  margin-bottom: 20px;
+
+  // 右向き
+  &.bl_baloonBox__right {
+    flex-direction: row-reverse;
+  }
+}
+
+.bl_baloon {
+  // 基準位置を設定
+  position: relative;
+
+  // サイズ
+  max-width: 480px;
+
+  // 背景色
+  background-color: #fff;
+
+  // 角丸
+  border-radius: 15px;
+  border: 1px solid v.$black-color;
+
+  // 余白
+  padding: 15px;
+  margin-left: 30px;
+
+  // 左寄せ
+  margin-right: auto;
+
+  // とんがり部分（内側）
+  &::before {
+    // 位置
+    position: absolute;
+    top: calc(1.5em + 1px);
+    left: -18.7px;
+    z-index: 1;
+
+    // スタイル
+    // 18.7x28の三角形（幅を1pxにしたいので、高さが28pxになるように調整）
+    display: block;
+    content: "";
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    border-right: 18.7px solid #fff;
+  }
+
+  // とんがり部分（外側）
+  &::after {
+    // 位置
+    position: absolute;
+    top: 1.5em;
+    left: -20px;
+
+    // スタイル
+    // 20x30の三角形
+    display: block;
+    content: "";
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 20px solid v.$black-color;
+  }
+
+  // 右向き
+  &.bl_baloon__right {
+    margin-right: 30px;
+    margin-left: auto;
+
+    // とんがり部分（内側）
+    &::before {
+      left: auto;
+      right: -18.7px;
+      border-left: 18.7px solid #fff;
+      border-right: none;
+    }
+
+    &::after {
+      left: auto;
+      right: -20px;
+      border-left: 20px solid v.$black-color;
+      border-right: none;
+    }
+  }
+}
+
+// ----------------------
+//  test
+// ----------------------
+
+.balloon2-left {
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 0 1.5em 15px;
+  padding: 7px 10px;
+  min-width: 120px;
+  max-width: 100%;
+  color: #555;
+  font-size: 16px;
+  background: #fff;
+  border: solid 3px #555;
+  box-sizing: border-box;
+}
+
+.balloon2-left::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -24px;
+  margin-top: -12px;
+  border: 12px solid transparent;
+  border-right: 12px solid #fff;
+  z-index: 2;
+}
+
+.balloon2-left::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  margin-top: -14px;
+  border: 14px solid transparent;
+  border-right: 14px solid #555;
+  z-index: 1;
+}
+
+.balloon2-left p {
+  margin: 0;
+  padding: 0;
+}
+
+// ----------------------
+//  アイコン
+// ----------------------
+// アイコン
+.bl_icon {
+  // 中央揃え
+  text-align: center;
+}
+
+// アイコン画像
+.bl_icon_imgWrapper {
+  // 基準位置を設定
+  position: relative;
+
+  // 名前との余白
+  margin-bottom: 10px;
+
+  // 1:1で表示する指定（1/1=100%）
+  // absolute指定があるので、heightでは高さを確保できないため、
+  // padding-topで領域を確保する
+  padding-top: 80px;
+  padding-right: 80px;
+
+  // 表示不要な部分を隠す
+  overflow: hidden;
+
+  // 丸型にくり抜く
+  border-radius: 50%;
+
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    // 元画像の高さ/幅が100%より小さい場合は、width:auto,height:100%
+    // 元画像の高さ/幅が100%より大きい場合は、width:100%,height:auto
+    // メモ：動的に定義できると良い(jQuery)
+    max-width: none;
+    width: auto;
+    height: 100%;
+  }
+}
+
+.bl_icon_name {
+  color: v.$black-color;
+}
+
+// ----------------------
 //  カードモジュール
 // ----------------------
 .un_card01 {
@@ -79,13 +266,16 @@
     overflow: hidden;
 
     img {
+      // 上下中央揃え
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
+      left: 50%;
+      transform: translate(-50%, -50%);
 
       // 元画像の高さ/幅が56.25%より小さい場合は、width:auto,height:100%
       // 元画像の高さ/幅が56.25%より大きい場合は、width:100%,height:auto
       // メモ：動的に定義できると良い(jQuery)
+      max-width: none;
       width: auto;
       height: 100%;
     }
@@ -168,18 +358,20 @@
 
     // カード上部の半円部分のボーダーを欠けさせる
     // カードの背景色で上書き
+
     &::before {
       // 位置
       position: absolute;
-      top: -3px;
+      top: -15px;
       left: 50%;
       transform: translateX(-50%);
 
       // スタイル
+      // 幅はbl_card_badgeのボーダー3px分を差し引いた値
       display: block;
       content: "";
-      width: 70px;
-      height: 3px;
+      width: 64px;
+      height: 30px;
       background-color: #fff;
     }
   }
@@ -259,9 +451,11 @@
     margin-bottom: 15px;
 
     img {
+      // 上下中央揃え
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
+      left: 50%;
+      transform: translate(-50%, -50%);
 
       // 元画像の高さ/幅が56.25%より小さい場合は、width:auto,height:100%
       // 元画像の高さ/幅が56.25%より大きい場合は、width:100%,height:auto
