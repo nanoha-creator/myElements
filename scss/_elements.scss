@@ -10,7 +10,7 @@
 //  吹き出しモジュール
 // ----------------------
 // アイコン＋吹き出しのペア
-.bl_baloonBox {
+.bl_balloonBox {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -19,12 +19,12 @@
   margin-bottom: 20px;
 
   // 右向き
-  &.bl_baloonBox__right {
+  &.bl_balloonBox__right {
     flex-direction: row-reverse;
   }
 }
 
-.bl_baloon {
+.bl_balloon {
   // 基準位置を設定
   position: relative;
 
@@ -45,104 +45,368 @@
   // 左寄せ
   margin-right: auto;
 
-  // とんがり部分（内側）
+  // とんがり部分（外側）
   &::before {
     // 位置
     position: absolute;
-    top: calc(1.5em + 1px);
-    left: -18.7px;
-    z-index: 1;
-
-    // スタイル
-    // 18.7x28の三角形（幅を1pxにしたいので、高さが28pxになるように調整）
-    display: block;
-    content: "";
-    border-top: 14px solid transparent;
-    border-bottom: 14px solid transparent;
-    border-right: 18.7px solid #fff;
-  }
-
-  // とんがり部分（外側）
-  &::after {
-    // 位置
-    position: absolute;
     top: 1.5em;
-    left: -20px;
+    right: 100%;
 
     // スタイル
     // 20x30の三角形
     display: block;
     content: "";
     border-top: 15px solid transparent;
-    border-bottom: 15px solid transparent;
     border-right: 20px solid v.$black-color;
+    border-bottom: 15px solid transparent;
+    border-left: none;
+  }
+
+  // とんがり部分（内側）
+  &::after {
+    // 位置
+    position: absolute;
+    top: 1.5em;
+    right: calc(100% - 1.6px);
+    z-index: 1;
+
+    // スタイル
+    display: block;
+    content: "";
+    border-top: 15px solid transparent;
+    border-right: 20px solid #fff;
+    border-bottom: 15px solid transparent;
+    border-left: none;
   }
 
   // 右向き
-  &.bl_baloon__right {
+  &.bl_balloon__right {
     margin-right: 30px;
     margin-left: auto;
 
-    // とんがり部分（内側）
+    // とんがり部分（外側）
     &::before {
+      // 位置
+      // 角丸のボーダー分＋三角形の横幅
       left: auto;
-      right: -18.7px;
-      border-left: 18.7px solid #fff;
+      left: 100%;
+
+      // スタイル
+      border-top: 15px solid transparent;
       border-right: none;
+      border-bottom: 15px solid transparent;
+      border-left: 20px solid v.$black-color;
     }
 
+    // とんがり部分（内側）
     &::after {
+      // 位置
       left: auto;
-      right: -20px;
-      border-left: 20px solid v.$black-color;
+      left: calc(100% - 1.6px);
+
+      // スタイル
+      border-top: 15px solid transparent;
       border-right: none;
+      border-bottom: 15px solid transparent;
+      border-left: 20px solid #fff;
     }
   }
 }
 
 // ----------------------
-//  test
+//  楕円の吹き出し
 // ----------------------
+// 2つごとに改行
+.bl_roundBalloonUnit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
-.balloon2-left {
+.bl_roundBalloon {
+  // 基準位置を設定
   position: relative;
-  display: inline-block;
-  margin: 1.5em 0 1.5em 15px;
-  padding: 7px 10px;
-  min-width: 120px;
-  max-width: 100%;
-  color: #555;
-  font-size: 16px;
-  background: #fff;
-  border: solid 3px #555;
-  box-sizing: border-box;
-}
 
-.balloon2-left::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -24px;
-  margin-top: -12px;
-  border: 12px solid transparent;
-  border-right: 12px solid #fff;
-  z-index: 2;
-}
+  // サイズ
+  width: 120px;
+  height: 80px;
 
-.balloon2-left::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -30px;
-  margin-top: -14px;
-  border: 14px solid transparent;
-  border-right: 14px solid #555;
-  z-index: 1;
-}
+  // 文字を中央揃え
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-.balloon2-left p {
-  margin: 0;
-  padding: 0;
+  // 背景色
+  background-color: v.$accent-color-elm;
+
+  // 楕円
+  border-radius: 50%;
+  border: 1px solid #555;
+
+  // 余白
+  padding: 15px;
+  margin: 20px 50px;
+
+  > span {
+    color: white;
+    font-weight: map-get(v.$fontweights, bold);
+    font-size: 1.25em;
+  }
+
+  // とんがり部分（外側）
+  &::before {
+    // 位置
+    position: absolute;
+    top: 50%;
+    right: calc(100% - 2px);
+    transform: translateY(-50%);
+    z-index: -1;
+
+    // スタイル
+    // 15x24の三角形
+    display: block;
+    content: "";
+    border-top: 12px solid transparent;
+    border-right: 15px solid #555;
+    border-bottom: 12px solid transparent;
+    border-left: none;
+  }
+
+  // とんがり部分（内側）
+  &::after {
+    // 位置
+    position: absolute;
+    top: 50%;
+    right: calc(100% - 4px);
+    transform: translateY(-50%);
+    z-index: 1;
+
+    // スタイル
+    display: block;
+    content: "";
+    border-top: 12px solid transparent;
+    border-right: 15px solid v.$accent-color-elm;
+    border-bottom: 12px solid transparent;
+    border-left: none;
+  }
+
+  // 右向き
+  &.bl_roundBalloon__right {
+    // とんがり部分（外側）
+    &::before {
+      // 位置
+      left: auto;
+      left: calc(100% - 2px);
+
+      // スタイル
+      border-top: 12px solid transparent;
+      border-right: none;
+      border-bottom: 12px solid transparent;
+      border-left: 15px solid #555;
+    }
+
+    // とんがり部分（内側）
+    &::after {
+      // 位置
+      left: auto;
+      left: calc(100% - 4px);
+
+      // スタイル
+      border-top: 12px solid transparent;
+      border-right: none;
+      border-bottom: 12px solid transparent;
+      border-left: 15px solid v.$accent-color-elm;
+    }
+  }
+
+  // 下向き
+  &.bl_roundBalloon__bottom {
+    // とんがり部分（外側）
+    &::before {
+      // 位置
+      right: auto;
+      top: calc(100% - 2px);
+      left: 50%;
+      transform: translateX(-50%);
+
+      // スタイル
+      border-top: 15px solid #555;
+      border-right: 12px solid transparent;
+      border-bottom: none;
+      border-left: 12px solid transparent;
+    }
+
+    // とんがり部分（内側）
+    &::after {
+      // 位置
+      right: auto;
+      top: calc(100% - 4px);
+      left: 50%;
+      transform: translateX(-50%);
+
+      // スタイル
+      border-top: 15px solid v.$accent-color-elm;
+      border-right: 12px solid transparent;
+      border-bottom: none;
+      border-left: 12px solid transparent;
+    }
+  }
+
+  // 上向き
+  &.bl_roundBalloon__top {
+    // とんがり部分（外側）
+    &::before {
+      // 位置
+      top: auto;
+      right: auto;
+      bottom: calc(100% - 2px);
+      left: 50%;
+      transform: translateX(-50%);
+
+      // スタイル
+      border-top: none;
+      border-right: 12px solid transparent;
+      border-bottom: 15px solid #555;
+      border-left: 12px solid transparent;
+    }
+
+    // とんがり部分（内側）
+    &::after {
+      // 位置
+      top: auto;
+      right: auto;
+      bottom: calc(100% - 4px);
+      left: 50%;
+      transform: translateX(-50%);
+
+      // スタイル
+      border-top: none;
+      border-right: 12px solid transparent;
+      border-bottom: 15px solid v.$accent-color-elm;
+      border-left: 12px solid transparent;
+    }
+  }
+
+  // 左上向き
+  // 左向き吹き出しを基準に、回転＆位置調整
+  &.bl_roundBalloon__diagonalLT {
+    // とんがり部分（外側）
+    &::before {
+      // 位置
+      top: 0;
+      right: auto;
+      bottom: auto;
+      left: 0;
+      transform: rotate(45deg);
+    }
+
+    // とんがり部分（内側）
+    &::after {
+      // 位置
+      top: 1px;
+      right: auto;
+      bottom: auto;
+      left: 1px;
+      transform: rotate(45deg);
+    }
+  }
+
+  // 左下向き
+  // 左向き吹き出しを基準に、回転＆位置調整
+  &.bl_roundBalloon__diagonalLB {
+    // とんがり部分（外側）
+    &::before {
+      // 位置
+      top: auto;
+      right: auto;
+      bottom: 0;
+      left: 0;
+      transform: rotate(-45deg);
+    }
+
+    // とんがり部分（内側）
+    &::after {
+      // 位置
+      top: auto;
+      right: auto;
+      bottom: 1px;
+      left: 1px;
+      transform: rotate(-45deg);
+    }
+  }
+
+  // 右上向き
+  // 右向き吹き出しを基準に、回転＆位置調整
+  &.bl_roundBalloon__diagonalRT {
+    // とんがり部分（外側）
+    &::before {
+      // 位置
+      top: 0;
+      right: 0;
+      bottom: auto;
+      left: auto;
+      transform: rotate(-45deg);
+
+      // スタイル
+      border-top: 12px solid transparent;
+      border-right: none;
+      border-bottom: 12px solid transparent;
+      border-left: 15px solid #555;
+    }
+
+    // とんがり部分（内側）
+    &::after {
+      // 位置
+      top: 1px;
+      right: 1px;
+      bottom: auto;
+      left: auto;
+      transform: rotate(-45deg);
+
+      // スタイル
+      border-top: 12px solid transparent;
+      border-right: none;
+      border-bottom: 12px solid transparent;
+      border-left: 15px solid v.$accent-color-elm;
+    }
+  }
+
+  // 右下向き
+  // 右向き吹き出しを基準に、回転＆位置調整
+  &.bl_roundBalloon__diagonalRB {
+    // とんがり部分（外側）
+    &::before {
+      // 位置
+      top: auto;
+      right: 0;
+      bottom: 0;
+      left: auto;
+      transform: rotate(45deg);
+
+      // スタイル
+      border-top: 12px solid transparent;
+      border-right: none;
+      border-bottom: 12px solid transparent;
+      border-left: 15px solid #555;
+    }
+
+    // とんがり部分（内側）
+    &::after {
+      // 位置
+      top: auto;
+      right: 1px;
+      bottom: 1px;
+      left: auto;
+      transform: rotate(45deg);
+
+      // スタイル
+      border-top: 12px solid transparent;
+      border-right: none;
+      border-bottom: 12px solid transparent;
+      border-left: 15px solid v.$accent-color-elm;
+    }
+  }
 }
 
 // ----------------------
